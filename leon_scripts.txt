@@ -1,0 +1,1 @@
+python3 codes\main.py --mode train --model .\pretrained_models\EGVSR_iter420000.pth  --exp_dir outputs --opt train.yml --gpu_id 0
