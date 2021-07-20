@@ -90,7 +90,10 @@ def get_upsampling_func(scale=4, degradation='BI'):
             align_corners=False)
 
     elif degradation == 'BD':
-        upsample_func = BicubicUpsample(scale_factor=scale)
+        if scale==4:
+            upsample_func = BicubicUpsample(scale_factor=scale)
+        else:
+            upsample_func = BicubicUpsample2(scale_factor=scale)
 
     else:
         raise ValueError('Unrecognized degradation: {}'.format(degradation))
@@ -153,4 +156,20 @@ class BicubicUpsample(nn.Module):
             n, c, s, h * s, -1).permute(0, 1, 3, 4, 2).reshape(n, c, h * s, -1)
 
         return output
+
+class BicubicUpsample2(nn.Module):
+    def __init__(self, scale_factor):
+        super(BicubicUpsample2, self).__init__()
+        self.scale_factor = scale_factor
+
+    def forward(self, input):
+        output = F.interpolate(input, scale_factor=self.scale_factor, mode="bicubic", align_corners=False)
+        return output
+
+
+if __name__=='__main__':
+    net = BicubicUpsample2(3)
+    input = torch.rand((3, 3, 32, 32))
+    output = net(input)
+    print(output.shape)
 

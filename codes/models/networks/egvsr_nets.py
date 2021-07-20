@@ -120,11 +120,11 @@ class SRNet(nn.Module):
             nn.ReLU(inplace=True))
 
         self.conv_up_cheap = nn.Sequential(
-            nn.PixelShuffle(4),
+            nn.PixelShuffle(scale),
             nn.ReLU(inplace=True))
 
         # output conv.
-        self.conv_out = nn.Conv2d(4, out_nc, 3, 1, 1, bias=True)
+        self.conv_out = nn.Conv2d(4 * ((4//scale)**2), out_nc, 3, 1, 1, bias=True)
 
         # upsampling function
         self.upsample_func = upsample_func
@@ -133,10 +133,11 @@ class SRNet(nn.Module):
         """ lr_curr: the current lr data in shape nchw
             hr_prev_tran: the previous transformed hr_data in shape n(4*4*c)hw
         """
-
         out = self.conv_in(torch.cat([lr_curr, hr_prev_tran], dim=1))
         out = self.resblocks(out)
         out = self.conv_up_cheap(out)
+        # print(out.shape)
+        # exit(0)
         out = self.conv_out(out)
         # out += self.upsample_func(lr_curr)
 
@@ -158,7 +159,7 @@ class FRNet(BaseSequenceGenerator):
 
         # define fnet & srnet
         self.fnet = FNet(in_nc)
-        self.srnet = SRNet(in_nc, out_nc, nf, nb, self.upsample_func)
+        self.srnet = SRNet(in_nc, out_nc, nf, nb, self.upsample_func, scale=scale)
 
     def generate_dummy_input(self, lr_size):
         c, lr_h, lr_w = lr_size
