@@ -103,7 +103,8 @@ train:
 
   gan_crit:
     type: GAN
-    weight: 0.01
+    # weight: 0.01
+    weight: 0.0
     reduction: mean
 
 
@@ -145,4 +146,4 @@ metric:
 logger:
   log_freq: 100
   decay: 0.99
-  ckpt_freq: 20000
+  ckpt_freq: 5000

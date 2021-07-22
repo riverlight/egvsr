@@ -31,7 +31,7 @@ model:
     nf: 64
     nb: 10
     # load_path: pretrained_models/EGVSR_iter420000.pth
-    load_path: outputs\train\ckpt\G_iter40000.pth
+    load_path: outputs\train\ckpt\G_iter80000.pth
 
 
 # test configs

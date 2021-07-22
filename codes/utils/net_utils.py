@@ -90,10 +90,8 @@ def get_upsampling_func(scale=4, degradation='BI'):
             align_corners=False)
 
     elif degradation == 'BD':
-        if scale==4:
-            upsample_func = BicubicUpsample(scale_factor=scale)
-        else:
-            upsample_func = BicubicUpsample2(scale_factor=scale)
+        upsample_func = BicubicUpsample2(scale_factor=scale)
+        # upsample_func = BicubicUpsample(scale_factor=scale)
 
     else:
         raise ValueError('Unrecognized degradation: {}'.format(degradation))

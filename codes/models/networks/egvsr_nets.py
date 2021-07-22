@@ -513,7 +513,7 @@ class SpatialDiscriminator(BaseSequenceDiscriminator):
         return pred, ret_dict
 
 
-if __name__ == "__main__":
+def test0():
     from torchsummary import summary
 
     img_size = (960, 640)
@@ -527,3 +527,15 @@ if __name__ == "__main__":
 
     print(model)
     summary(model, (64, *img_size), batch_size=1, device=cpu_cuda)
+
+
+def test_SRNet():
+    net = SRNet(scale=4)
+    input = torch.rand((1, 3, 32, 32))
+    output = net(input)
+    print(output.shape)
+    pass
+
+if __name__ == "__main__":
+    # test0()
+    test_SRNet()

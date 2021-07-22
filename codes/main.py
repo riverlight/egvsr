@@ -289,6 +289,8 @@ if __name__ == '__main__':
                         help='size of the input frame')
     parser.add_argument('--test_speed', action='store_true',
                         help='whether to test the actual running speed')
+    parser.add_argument('--upsample', type=str, default='egvsr',
+                        help='upsample function, default is egvsr, or leon')
     args = parser.parse_args()
 
 

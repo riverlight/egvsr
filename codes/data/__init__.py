@@ -107,6 +107,11 @@ def prepare_data(opt, data, kernel):
             border_size: border_size + scale * lr_w
         ]
         gt_data = gt_data.view(n, t, c, scale * lr_h, scale * lr_w)
+        if opt['upsample'].lower()=='leon':
+            n, t, c, w, h = gt_data.shape
+            lr_data = torch.zeros(n, t, c, w//2, h//2).cuda()
+            for i in range(n):
+                lr_data[i, ...] = F.interpolate(gt_data[i, ...], scale_factor=1/scale, mode="bicubic", align_corners=False)
 
     else:
         raise ValueError('Unrecognized degradation type: {}'.format(

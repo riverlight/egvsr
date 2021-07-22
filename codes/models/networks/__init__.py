@@ -56,7 +56,8 @@ def define_discriminator(opt):
         net_D = SpatioTemporalDiscriminator(
             in_nc=net_D_opt['in_nc'],
             spatial_size=spatial_size,
-            tempo_range=net_D_opt['tempo_range'])
+            tempo_range=net_D_opt['tempo_range'],
+            scale=opt['scale'])
 
     elif net_D_opt['name'].lower() == 'snet':  # spatial discriminator
         from .tecogan_nets import SpatialDiscriminator
