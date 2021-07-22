@@ -127,9 +127,13 @@ def test_tensor():
     img_tensor = transforms.ToTensor()(img)
     print(img_tensor.shape)
 
+    img_1 = transforms.ToPILImage(img_tensor)
+    img_2 = transforms.functional.resize(img_1, [300, 578], interpolation=2)
+    img_2.show()
+
 if __name__ == "__main__":
     # test_SRNet()
     # test()
     # test2()
-    test_inter()
-    # test_tensor()
+    # test_inter()
+    test_tensor()

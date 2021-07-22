@@ -2,6 +2,7 @@
 scale: 2
 manual_seed: 0
 verbose: true
+upsample: leon
 
 
 # dataset configs
@@ -103,8 +104,8 @@ train:
 
   gan_crit:
     type: GAN
-    # weight: 0.01
-    weight: 0.0
+    weight: 0.01
+    # weight: 0.0
     reduction: mean
 
 

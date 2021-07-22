@@ -2,6 +2,7 @@
 scale: 2
 manual_seed: 0
 verbose: false
+upsample: leon
 
 
 # dataset configs
@@ -31,7 +32,7 @@ model:
     nf: 64
     nb: 10
     # load_path: pretrained_models/EGVSR_iter420000.pth
-    load_path: outputs_x2\train\ckpt\G_iter20000.pth
+    load_path: outputs_x2\train\ckpt\G_iter10000.pth
 
 
 # test configs
